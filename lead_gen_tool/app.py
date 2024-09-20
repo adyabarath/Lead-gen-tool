@@ -26,11 +26,11 @@ import rocketreach
 import os
 
 
-rr = rocketreach.Gateway(api_key="154f467k3381258aa968f640d89638c71bbf1bec")
+rr = rocketreach.Gateway(api_key="")
 result_rocket_reach = rr.account.get()
-os.environ["SERPER_API_KEY"] = "3cca4e86a4d3e468b0db1c9e6438b4701daad293"
+os.environ["SERPER_API_KEY"] = ""
 client = AzureOpenAI(
-  api_key="c18c9011aa0746d78cd93f07da587452",
+  api_key="",
   api_version="2024-02-01",
   azure_endpoint="https://gpt4o-adya.openai.azure.com/"
 )
