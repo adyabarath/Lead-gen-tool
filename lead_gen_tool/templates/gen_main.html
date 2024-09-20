@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='gen_main.css') }}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Generation</title>
+    <style>
+        .submit-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="images/logo.png" alt="">
+            </div>
+            <span class="logo_name">Lead Gen Tool</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('company_gen') }}">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Industry</span>
+                </a></li>
+                <li><a href="{{ url_for('index') }}">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-thumbs-up"></i>
+                        <span class="text">Total companies</span>
+                        <span class="number">{{ selected_companies|length }}</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">New company-details</span>
+                </div>
+                <form action="{{ url_for('update') }}" method="post">
+                
+                    <div class="activity-data">
+                        
+                        <div class="data names">
+                            <span class="data-title">Company Name</span>
+                            {% for company in selected_companies %}
+                            <span class="data-list">
+                                <input type="checkbox" name="selected_companies_details" value="{{ company['Company_name'] }}#bar#{{ company['about'] }}#bar#{{ company['categories'] }}#bar#{{ company['sub_domains'] }}#bar#{{ company['website'] }}#bar#{{ company['industry'] }}#bar#{{ company['employee_size'] }}#bar#{{ company['annual_revenue'] }}#bar#{{ company['location'] }}#bar#{{ company['founded'] }}#bar#{{ company['additional_info'] }}#bar#{{ company['people_name'] }}#bar#{{ company['headline'] }}#bar# {{ company['linked_url'] }}">
+                                {{ company['Company_name'] }}
+                            </span>
+                            {% endfor %}
+                            <br>
+                        </div>
+                        <div class="data email">
+                            <span class="data-title">Industry</span>
+                            {% for company in selected_companies %}
+                            <span class="data-list">{{ company['industry'] }}</span>
+                            {% endfor %}
+                            <br>
+                        </div>
+                        <div class="data joined">
+                            <span class="data-title">Employee Size</span>
+                            {% for company in selected_companies %}
+                            <span class="data-list">{{ company['employee_size'] }}</span>
+                            {% endfor %}
+                            <br>
+                        </div>
+                        <div class="data type">
+                            <span class="data-title">City</span>
+                            {% for company in selected_companies %}
+                            <span class="data-list">{{ company['location'] }}</span>
+                            {% endfor %}
+                             <br>
+                        </div>
+                    
+                    <div class="submit-container">
+                        <button type="submit" class="button">
+                            <span class="submit">Submit Selecion</span>
+                            <span class="loading"><i class="fa fa-refresh"></i></span>
+                            <span class="check"><i class="fa fa-check"></i></span>
+                        </button>
+                    </div>  
+                </div>
+                </form>                    
+            
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='gen_main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:300,400");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: lightblue;
+}
+
+h2 {
+  margin: 0px;
+  font-weight: 400;
+  color: #707584;
+  font: 24px/24px "Open Sans", sans-serif;
+}
+
+h3 {
+  margin: 0px 0px 5px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.wrapper {
+  width: 100vw;
+  font-family: "Open Sans", sans-serif;
+  padding: 50px 10px;
+}
+
+.app-wrapper {
+  background-color: #fff;
+  height: 1000px;
+  max-width: 880px;
+  margin: 0 auto;
+  border-radius: 8px;
+  display: flex;
+
+  -webkit-box-shadow: 0px 8px 24px 4px rgb(83, 255, 40);
+  -moz-box-shadow: 0px 8px 24px 4px rgb(151, 255, 40);
+  box-shadow: 0px 8px 24px 4px rgb(122, 255, 40);
+}
+
+.wallet {
+  width: 400px;
+  background-color: #f2f2f2;
+  height: 100%;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  padding: 50px;
+}
+
+.wallet h2 {
+  display: inline-block;
+}
+
+.company-details p {
+  margin: 5px 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.company-details strong {
+  font-weight: bold;
+}
+
+.transactions-wrapper {
+  width: 520px;
+  padding: 50px;
+}
+
+.total-balance {
+  display: inline-block;
+  float: right;
+  font-weight: 600;
+  font-size: 32px;
+  color: #444750;
+}
+.total-balance::before {
+  content: "$";
+}
+
+.transactions {
+  margin-top: 60px;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 50px;
+  height: 700px;
+  overflow: scroll;
+}
+
+.transactions.show {
+  animation: fade-in 0.3s 1;
+}
+
+.transactions::-webkit-scrollbar {
+  display: none;
+}
+
+.transaction-item {
+  margin-bottom: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-item_details {
+  width: 270px;
+}
+
+.transaction-item_amount {
+  width: 110px;
+  text-align: right;
+}
+
+.transaction-item_amount img {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.cards {
+  margin-top: 60px;
+}
+
+.company-details {
+  margin-bottom: 45px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.company-details:hover {
+  transform: scale(1.07);
+}
+
+.company-details.active {
+  border-color: #8393ca;
+  border-width: 3px;
+}
+
+/* animations */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* media queries */
+@media (max-width: 810px) {
+  .wrapper {
+    border-radius: 8px;
+  }
+  .wallet {
+    width: 100%;
+    border-top-right-radius: inherit;
+    padding-bottom: 25px;
+  }
+  .cards {
+    margin-top: 25px;
+  }
+  .app-wrapper {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    border-top-right-radius: inherit;
+    height: initial;
+  }
+  .company-details {
+    width: calc(50% - 25px);
+    max-width: 260px;
+    display: inline-block;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    text-align: left;
+  }
+  .company-details:nth-of-type(2) {
+    margin-right: 0px;
+  }
+  .transactions {
+    height: initial;
+  }
+  .transactions-wrapper {
+    width: 100%;
+  }
+  .transaction-item_amount {
+    width: calc(100% - 270px);
+  }
+}
+
+@media (max-width: 530px) {
+  h3 {
+    line-height: 24px;
+  }
+  .cards {
+    text-align: center;
+  }
+  .company-details {
+    width: calc(100% - 25px);
+    max-width: 260px;
+  }
+  .company-details:nth-of-type(2) {
+    margin-right: 25px;
+  }
+  .company-details:last-of-type {
+    margin-bottom: 0px;
+  }
+  .total-balance {
+    font-size: 22px;
+  }
+  .transaction-item_amount {
+    width: 110px;
+  }
+}
+
+@media (max-width: 390px) {
+  .wallet {
+    padding: 50px 25px;
+  }
+  .transactions-wrapper {
+    padding: 50px 25px;
+  }
+  h2 {
+    font: 18px/24px "Open Sans", sans-serif;
+  }
+}
+
+.wra {
+    width: 100vw;
+    font-family: "Open Sans", sans-serif;
+    padding: 50px 10px;
+  }
+  
+.app {
+    background-color: #fff;
+    height: 1000px;
+    max-width: 880px;
+    margin: 0 auto;
+    border-radius: 8px;
+    display: flex;
+  
+    -webkit-box-shadow: 0px 8px 24px 4px rgb(83, 255, 40);
+    -moz-box-shadow: 0px 8px 24px 4px rgb(151, 255, 40);
+    box-shadow: 0px 8px 24px 4px rgb(122, 255, 40);
+  }
+  

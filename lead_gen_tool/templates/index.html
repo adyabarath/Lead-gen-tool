@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Lead</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo_item">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="" />Lead Gen Tool
+    </div>
+    <div class="search_bar">
+      <input type="text" placeholder="Search" />
+    </div>
+    <div class="navbar_content">
+      <i class=""></i>
+      <i class="" id="darkLight"></i>
+      <i class=""></i>
+      
+    </div>
+  </nav>
+
+ <!-- Sidebar -->
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="menu_content">
+    <br>
+      <ul class="menu_items">
+          <div class="menu_title menu_dahsboard"></div>
+          <!-- Industries Section -->
+          <li class="item">
+              <div class="nav_link submenu_item">
+                  <span class="navlink_icon">
+                      <i class="bx bx-home-alt"></i>
+                  </span> 
+                  <span class="navlink">Industries</span>
+                  <i class="bx bx-chevron-right arrow-left"></i>
+              </div>
+              <ul class="menu_items submenu">
+                  <form id="industryForm" action="{{ url_for('submit') }}" method="POST">
+                      <div class="nav_link submenu_item">
+                          <input type="radio" id="retail" name="industry" value="Retail" onchange="submitForm('industryForm')">
+                          <label for="retail">Retail</label>
+                          <div class="check"></div>
+                      </div>
+                      <div class="nav_link submenu_item">
+                          <input type="radio" id="finance" name="industry" value="Finance" onchange="submitForm('industryForm')">
+                          <label for="finance">Finance</label>
+                          <div class="check"></div>
+                      </div>
+                  </form>
+              </ul>
+          </li>
+      </ul>
+
+    
+
+
+
+
+
+
+      <ul class="menu_items">
+        <div class="menu_title menu_editor"></div>
+
+        <!-- Country Section -->
+        <li class="item">
+          <div class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-flag"></i>
+            </span>
+            <span class="navlink">Country</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="#" class="nav_link sublink">India</a>
+          </ul>
+        </li>
+
+        <!-- New Generation Section -->
+        <li class="item">
+          <a href="{{ url_for('gen_main') }}" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bxs-magic-wand"></i>
+            </span>
+            <span class="navlink">New Generation</span>
+          </a>
+        </li>
+
+          <br><br>
+        <li class="item">
+          <a href="{{ url_for('download') }}" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-cloud-upload"></i>
+            </span>
+            <span class="navlink">DownLoad</span>
+          </a>
+        </li>
+
+      <!-- Sidebar Open / Close -->
+      <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+          <span>Expand</span>
+          <i class="bx bx-log-in"></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+          <span>Collapse</span>
+          <i class="bx bx-log-out"></i>
+        </div>
+      </div>
+    </div>
+
+    <ul class="company-list">
+      <br><br><br>
+
+      <!-- LinkedIn URL Input -->
+      <div class="linkedin-section">
+        <label for="linkedin_url">LinkedIn URL:</label>
+        <input type="text" id="linkedin_url" name="linkedin_url" placeholder="Enter LinkedIn URL" required>
+        <button type="button" onclick="submitLinkedinUrl()">Submit</button>
+      </div>
+
+      <!-- Email and Phone Number Display -->
+      <div id="contact_info" style="display: none;">
+        <h3>Email: <span id="email" name="email"></span></h3>
+        <h3>Phone Number: <span id="phone"></span></h3>
+        <button id="add_button" style="display: none;" onclick="addContactInfo()">Add</button>
+      </div>
+
+    </ul>
+  </div>
+  </nav>
+
+  <!-- Company List -->
+   
+  <div>
+    <ul class="company-list">
+      <br><br><br>
+      {% for index, company in enumerate(companies) %}
+        <li>
+          <div class="card">
+            <h3>{{ index + 1 }}. {{ company['Company_name'] }}</h3>
+            <p>{{ company['industry'] }}</p>
+            <p>{{ company['employee_size'] }}</p>
+            <p>{{ company['location'] }}</p>
+            <a href="{{ url_for('company_detail', index=index, industry=request.form['industry']) }}"><button>View</button></a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    function submitForm(formId) {
+      document.getElementById(formId).submit();
+    }
+    function submitLinkedinUrl() {
+      const linkedinUrl = document.getElementById('linkedin_url').value;
+      fetch('/get_contact_info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ linkedin_url: linkedinUrl }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          document.getElementById('email').textContent = data.email;
+          document.getElementById('phone').textContent = data.phone;
+          document.getElementById('contact_info').style.display = 'block';
+          document.getElementById('add_button').style.display = 'block';
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    function addContactInfo() {
+  const linkedinUrl = document.getElementById('linkedin_url').value;
+  const email = document.getElementById('email').textContent;  // Capture the email text
+
+  fetch('/add_contact_info', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      linkedin_url: linkedinUrl,
+      email: email   // Include the email in the request body
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='collection.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="app-wrapper">
+
+      <!-- Wallet -->
+      <aside class="wallet">
+        <h2>Company Details</h2>
+        <div class="cards">
+          <div class="company-details">
+            <h3>{{ company['Company_name'] }}</h3>
+            <p><h1>Category:</h1>   {{ company['categories'] }}</p>
+            <p><h1>Sub-domain:</h1> {{ company['sub_domains'] }}</p>
+            <p><h1>Website:</h1> <a href="{{ company['website'] }}" target="_blank">{{ company['website'] }}</a></p>
+            <p><h1>Industry:</h1>  {{ company['industry'] }}</p>
+            <p><h1>Employees:</h1>  {{ company['employee_size'] }}</p>
+            <p><h1>Annual Revenue:</h1>  {{ company['annual_revenue'] }}</p>
+            <p><h1>Founded:</h1> {{ company['founded'] }}</p>
+            <p><h1>Additional Info:</h1> {{ company['additional_info'] }}</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Workers Section -->
+      <content class="transactions-wrapper">
+        <h2>
+          Workers
+          <span class="total-balance"></span>
+        </h2>
+        <div class="transactions">
+          {% for worker in company['workers'] %}
+          <div class="transaction-item">
+            <div class="transaction-item_details">
+              <h3>{{ worker['name'] }}</h3>
+              <span class="details">{{ worker['headline'] }}</span>
+            </div>
+            <div class="transaction-item_amount">
+              <a href="{{ worker['linkedin_url'] }}" target="_blank">
+                <img src="{{ url_for('static', filename='linkedin.png') }}" alt="LinkedIn">
+              </a>
+              
+              {% if worker['email'] != '' %}
+              <a href="mailto:{{ worker['email'] }}">
+                <img src="{{ url_for('static', filename='gmail.png') }}" alt="Email">
+              </a>
+              {% endif %}
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </content>
+
+    </div>
+  </div>
+
+  <div class="wra">
+    <div class="app">
+        <aside class="wallet">
+            <h2>About Company</h2>
+        </aside>
+        <content class="transactions-wrapper">
+            <p>{{company['about']}}</p>
+        </content>
+        </div>
+    </aside>
+        </div>
+</body>
+</html>

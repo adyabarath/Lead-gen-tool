@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='gen_main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Duplicate</title>
+</head>
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            </div>
+            <span class="logo_name">Lead Gen Tool</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('gen_main') }}">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Generation Dashboard</span>
+                </a></li>
+                <li><a href="{{ url_for('index') }}">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+            
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-thumbs-up"></i>
+                        <span class="text">Total Company</span>
+                        <span class="number">{{ companies|length }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity">
+                
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Duplicates Company Names</span>
+                </div>
+                
+                <form action="{{ url_for('duplicate_extraction') }}" method="post" class="activity-data">
+                    
+                    <div class="data names">
+                        <span class="data-title">Name</span>
+                        {% for company in companies %}
+                        <span class="data-list">
+                            <input type="checkbox" name="Duplicate_company" value="{{ company.name }}|{{ company.linkedin_url }}">
+                            {{ company.name }}</span>   
+                        {% endfor %}
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Linkedin ID</span>
+                        {% for company in companies %}
+                        <span class="data-list">{{ company.linkedin_url }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                <br><br>
+                   <button type="submit" class="button" class="button" onclick="submitSelection()">
+                        <span class="submit">Regenerate</span>
+                        <span class="loading"><i class="fa fa-refresh"></i></span>
+                        <span class="check"><i class="fa fa-check"></i></span>
+                    </button>
+                    <br>
+                </form>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function submitSelection() {
+            var form = document.getElementById('companyForm');
+            form.action = "{{ url_for('duplicate_extraction') }}";
+            form.method = 'post';
+            form.submit();
+        }
+
+    </script>
+
+    <script src="{{ url_for('static', filename='gen_main.js') }}"></script>
+</body>
+</html>
+
+
