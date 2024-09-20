@@ -9,3 +9,8 @@ Welcome to **Lead Gen Tool**, an innovative platform designed to revolutionize c
    ```bash
    git clone https://github.com/adyabarath/Lead-gen-tool.git
    cd lead_gen-tool
+
+2.**Create a virtual environment (optional but recommended):**
+   ```bash
+python -m venv venv
+source venv/bin/activate 
