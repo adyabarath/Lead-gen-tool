@@ -15,7 +15,8 @@ Welcome to **Lead Gen Tool**, an innovative platform designed to revolutionize c
       ```bash
       python -m venv venv
       source venv/bin/activate 
-      ```
+         ```
+         
 3.**Install the required packages:**
     ```bash
     pip install -r requirements.txt
