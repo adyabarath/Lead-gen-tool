@@ -23,9 +23,18 @@ Welcome to **Lead Gen Tool**, an innovative platform designed to revolutionize c
       ```
 
 ### Setup
-1. Configure API Keys
-Before running the application, you need to set the API keys for the following services:
 
-OpenAI API
-Serper API
-RocketReach API
+1. **Configure API Keys**
+
+   Before running the application, you need to set the API keys for the following services:
+
+   - **OpenAI API**
+   - **Serper API**
+   - **RocketReach API**
+
+### Running the Application
+
+Once you've set up the API keys and ChromeDriver path, you can run the application using:
+
+```bash
+python app.py
