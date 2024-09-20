@@ -11,9 +11,18 @@ Welcome to **Lead Gen Tool**, an innovative platform designed to revolutionize c
    cd lead_gen-tool
 
 2.**Create a virtual environment (optional but recommended):**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
+      ```bash
+      python -m venv venv
+      source venv/bin/activate ```
 
+3.**Install the required packages:**
+    ```bash
+    pip install -r requirements.txt
 
-3. **Install the required packages:**
+### Setup
+1. Configure API Keys
+Before running the application, you need to set the API keys for the following services:
+
+OpenAI API
+Serper API
+RocketReach API
