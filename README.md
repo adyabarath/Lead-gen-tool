@@ -6,21 +6,21 @@ Welcome to **Lead Gen Tool**, an innovative platform designed to revolutionize c
 ## Installation
 
 1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/adyabarath/Lead-gen-tool.git
-   cd lead_gen-tool
-   ```
+      ```
+      git clone https://github.com/adyabarath/Lead-gen-tool.git
+      cd lead_gen-tool
+      ```
 
 2.**Create a virtual environment (optional but recommended):**
-      ```bash
-      python -m venv venv
-      source venv/bin/activate 
          ```
+         python -m venv venv
+         source venv/bin/activate 
+            ```
          
 3.**Install the required packages:**
-    ```bash
-    pip install -r requirements.txt
-      ```
+       ```
+       pip install -r requirements.txt
+         ```
 
 ### Setup
 
